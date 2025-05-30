@@ -1,19 +1,18 @@
+import { created } from '../helpers/http.js'
+
 export class CreateEmpresaController {
     constructor(createEmpresaUseCase) {
         this.createEmpresaUseCase = createEmpresaUseCase
     }
 
-    async execute(req, res) {
+    async execute(httpRequest) {
         try {
-            // const { razao_social, nome_fantasia, cnpj } = req.body
+            const params = httpRequest.body
 
-            // const empresa = await createEmpresaUseCase.execute({
-            //     razao_social,
-            //     nome_fantasia,
-            //     cnpj,
-            // })
+            const createdEmpresa =
+                await this.createEmpresaUseCase.execute(params)
 
-            res.status(201).json(empresa).message('Empresa criada com sucesso')
+            return created(createdEmpresa)
         } catch (error) {
             console.error(error)
             res.status(500).json({ message: 'Erro ao criar empresa' })

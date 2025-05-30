@@ -4,14 +4,8 @@ export class CreateEmpresaUseCase {
     }
 
     async execute(params) {
-        const empresaParams = {
-            ...params,
-            id: params.id,
-        }
-
-        const createdEmpresa = await this.createEmpresaRepository.execute(
-            empresaParams
-        )
+        const createdEmpresa =
+            await this.createEmpresaRepository.execute(params)
 
         return createdEmpresa
     }

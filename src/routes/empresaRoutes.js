@@ -1,9 +1,14 @@
 import { Router } from 'express'
+import { makeCreateEmpresaController } from '../factories/controllers/empresa.js'
 
 const router = Router()
 
-import { CreateEmpresaController } from '../controller/empresa/create-empresa.js'
+router.post('/', async (req, res) => {
+    const createEmpresaController = makeCreateEmpresaController()
 
-router.post('/empresas', (req, res) => CreateEmpresaController.create(req, res))
+    const { statusCode, body } = await createEmpresaController.execute(req)
+
+    res.status(statusCode).json(body)
+})
 
 export default router

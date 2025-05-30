@@ -1,4 +1,4 @@
-import pg from '../../config/db.js'
+import pool from '../../config/db.js'
 
 export class CreateEmpresaRepository {
     // criar uma query sql onde crie uma empresa com id, razao social, nome fantasia e cnpj
@@ -15,7 +15,7 @@ export class CreateEmpresaRepository {
             createEmpresaParams.cnpj,
         ]
 
-        const result = await pg.query(query, values)
+        const result = await pool.query(query, values)
         return result.rows[0]
     }
 }

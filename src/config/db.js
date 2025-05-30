@@ -1,12 +1,14 @@
-import { Pool } from 'pg'
-require('dotenv').config()
+import 'dotenv/config.js' // Load environment variables from .env file
+import pkg from 'pg'
 
-const pg = new Pool({
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
+const { Pool } = pkg
+
+const pool = new Pool({
+    host: 'localhost',
+    port: 5432,
+    user: 'root',
+    password: 'password',
+    database: 'empresaapp',
 })
 
-export default pg
+export default pool
