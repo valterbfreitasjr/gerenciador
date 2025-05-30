@@ -1,0 +1,28 @@
+services:
+    pgadmin:
+        image: dpage/pgadmin4
+        restart: always
+        ports:
+            - '8000:80'
+        volumes:
+            - pgadmin_data:/var/lib/pgadmin
+        environment:
+            PGADMIN_DEFAULT_EMAIL: admin@admin.com
+            PGADMIN_DEFAULT_PASSWORD: admin
+        depends_on:
+            - postgres
+
+    postgres:
+        image: postgres
+        container_name: empresa-app
+        environment:
+            POSTGRES_USER: 'root'
+            POSTGRES_PASSWORD: 'password'
+            POSTGRES_DB: empresaapp
+        ports:
+            - '5432:5432'
+        volumes:
+            - ./.postgres-data:/var/lib/postgresql/data
+
+volumes:
+    pgadmin_data: {}
