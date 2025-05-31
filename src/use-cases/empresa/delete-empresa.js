@@ -1,11 +1,11 @@
 export class DeleteEmpresaUseCase {
-    constructor(deleteEmpresaRepository) {
-        this.deleteEmpresaRepository = deleteEmpresaRepository
+    constructor(empresaRepository) {
+        this.empresaRepository = empresaRepository
     }
 
     async execute(empresaId) {
         const deletedEmpresa =
-            await this.deleteEmpresaRepository.execute(empresaId)
+            await this.empresaRepository.deleteEmpresa(empresaId)
 
         return deletedEmpresa
     }

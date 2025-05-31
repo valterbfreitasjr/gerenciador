@@ -1,3 +1,4 @@
+import { EmpresaRequest } from '../../models/EmpresaRequest.js'
 import { ok } from '../helpers/http.js'
 
 export class UpdateEmpresaController {
@@ -5,12 +6,12 @@ export class UpdateEmpresaController {
         this.updateEmpresaUseCase = updateEmpresaUseCase
     }
 
-    async execute(httpRequest) {
+    async execute(httpRequest, res) {
         try {
-            const empresaParams = httpRequest.body
+            const params = new EmpresaRequest(httpRequest.body)
 
             const updatedEmpresa =
-                await this.updateEmpresaUseCase.execute(empresaParams)
+                await this.updateEmpresaUseCase.execute(params)
 
             return ok(updatedEmpresa)
         } catch (error) {

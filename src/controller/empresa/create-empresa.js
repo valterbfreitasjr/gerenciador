@@ -1,3 +1,4 @@
+import { EmpresaRequest } from '../../models/EmpresaRequest.js'
 import { created } from '../helpers/http.js'
 
 export class CreateEmpresaController {
@@ -5,9 +6,9 @@ export class CreateEmpresaController {
         this.createEmpresaUseCase = createEmpresaUseCase
     }
 
-    async execute(httpRequest) {
+    async execute(httpRequest, res) {
         try {
-            const params = httpRequest.body
+            const params = new EmpresaRequest(httpRequest.body)
 
             const createdEmpresa =
                 await this.createEmpresaUseCase.execute(params)
@@ -15,7 +16,10 @@ export class CreateEmpresaController {
             return created(createdEmpresa)
         } catch (error) {
             console.error(error)
-            res.status(500).json({ message: 'Erro ao criar empresa' })
+            return {
+                statusCode: 500,
+                body: { message: 'Erro ao criar empresa' },
+            }
         }
     }
 }

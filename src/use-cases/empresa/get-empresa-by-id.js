@@ -1,11 +1,11 @@
 export class GetEmpresaByIdUseCase {
-    constructor(getEmpresaByIdRepository) {
-        this.getEmpresaByIdRepository = getEmpresaByIdRepository
+    constructor(empresaRepository) {
+        this.empresaRepository = empresaRepository
     }
 
     async execute(empresaId) {
         console.log(typeof empresaId)
-        const empresa = await this.getEmpresaByIdRepository.execute(empresaId)
+        const empresa = await this.empresaRepository.getEmpresaById(empresaId)
 
         if (!empresa) {
             return null

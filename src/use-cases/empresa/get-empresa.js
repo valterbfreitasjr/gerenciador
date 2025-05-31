@@ -1,10 +1,10 @@
 export class GetEmpresaUseCase {
-    constructor(getEmpresaRepository) {
-        this.getEmpresaRepository = getEmpresaRepository
+    constructor(empresaRepository) {
+        this.empresaRepository = empresaRepository
     }
 
     async execute() {
-        const empresas = await this.getEmpresaRepository.execute()
+        const empresas = await this.empresaRepository.getAllEmpresas()
         return empresas
     }
 }
