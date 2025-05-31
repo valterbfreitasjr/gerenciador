@@ -111,4 +111,11 @@ export class EmpresaRepository {
 
         return rows[0]
     }
+
+    async getEmpresaByCnpj(cnpj) {
+        const query = 'SELECT id FROM empresa WHERE cnpj = $1;'
+        const { rows } = await pool.query(query, [cnpj])
+
+        return rows.length > 0
+    }
 }

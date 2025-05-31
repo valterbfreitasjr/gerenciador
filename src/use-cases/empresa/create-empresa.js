@@ -5,6 +5,14 @@ export class CreateEmpresaUseCase {
     }
 
     async execute(params) {
+        const empresaExists = await this.empresaRepository.getEmpresaByCnpj(
+            params.Cnpj,
+        )
+
+        if (empresaExists) {
+            throw new Error(`Empresa com CNPJ ${params.Cnpj} já existe`)
+        }
+
         const createdEmpresa =
             await this.empresaRepository.createEmpresa(params)
 

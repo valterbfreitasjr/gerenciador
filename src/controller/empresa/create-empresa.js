@@ -17,8 +17,8 @@ export class CreateEmpresaController {
         } catch (error) {
             console.error(error)
             return {
-                statusCode: 500,
-                body: { message: 'Erro ao criar empresa' },
+                statusCode: error.statusCode || 500,
+                body: { message: error.message || 'Internal Server Error' },
             }
         }
     }
