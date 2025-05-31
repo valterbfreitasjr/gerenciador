@@ -53,10 +53,6 @@ export class SetorRepository {
 
         const { rows } = await pool.query(query, values)
 
-        if (rows.length === 0) {
-            throw new Error(`Setor with ID ${setorParams.id} not found`)
-        }
-
         return rows[0]
     }
 

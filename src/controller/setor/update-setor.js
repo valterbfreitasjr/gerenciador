@@ -11,9 +11,16 @@ export class UpdateSetorController {
 
             const updatedSetor = await this.updateSetorUseCase.execute(params)
 
+            if (!updatedSetor) {
+                return {
+                    statusCode: 404,
+                    body: { message: 'Setor não encontrado' },
+                }
+            }
+
             return ok(updatedSetor)
         } catch (error) {
-            return serverError()
+            return serverError({ message: 'Invalid Parameters!' })
         }
     }
 }
