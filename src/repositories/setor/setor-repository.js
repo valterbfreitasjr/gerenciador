@@ -16,7 +16,8 @@ export class SetorRepository {
 
     async deleteSetor(setorId) {
         const query = 'DELETE FROM setor WHERE id = $1;'
-        await pool.query(query, [setorId])
+        const affectedtRows = await pool.query(query, [setorId])
+        return affectedtRows.rowCount
     }
 
     async getSetorById(setorId) {

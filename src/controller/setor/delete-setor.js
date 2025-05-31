@@ -9,6 +9,13 @@ export class DeleteSetorController {
 
             const deletedSetor = await this.deleteSetorUseCase.execute(setorId)
 
+            if (!deletedSetor) {
+                return {
+                    statusCode: 404,
+                    body: { message: 'Setor não encontrado' },
+                }
+            }
+
             return {
                 statusCode: 200,
                 body: {

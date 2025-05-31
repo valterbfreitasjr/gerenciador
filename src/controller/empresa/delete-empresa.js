@@ -10,6 +10,13 @@ export class DeleteEmpresaController {
             const deletedEmpresa =
                 await this.deleteEmpresaUseCase.execute(empresaId)
 
+            if (!deletedEmpresa) {
+                return {
+                    statusCode: 404,
+                    body: { message: 'Empresa não encontrada' },
+                }
+            }
+
             return {
                 statusCode: 200,
                 body: {

@@ -37,7 +37,8 @@ export class EmpresaRepository {
 
     async deleteEmpresa(empresaId) {
         const query = 'DELETE FROM empresa WHERE id = $1;'
-        await pool.query(query, [empresaId])
+        const affectedRows = await pool.query(query, [empresaId])
+        return affectedRows.rowCount
     }
 
     async deleteEmpresaSetores(empresaId) {
