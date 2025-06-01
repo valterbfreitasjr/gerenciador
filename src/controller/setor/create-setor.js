@@ -1,4 +1,4 @@
-import { created } from '../helpers/http.js'
+import { created, serverError } from '../helpers/http.js'
 
 export class CreateSetorController {
     constructor(createSetorUseCase) {
@@ -13,12 +13,7 @@ export class CreateSetorController {
 
             return created(createdSetor)
         } catch (error) {
-            return {
-                statusCode: 500,
-                body: {
-                    error: 'Internal Server Error',
-                },
-            }
+            return serverError({ message: 'Erro ao criar setor' })
         }
     }
 }

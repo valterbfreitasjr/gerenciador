@@ -51,7 +51,7 @@ export class EmpresaRepository {
         const { rows } = await pool.query(query, [empresaId])
 
         if (rows.length === 0) {
-            throw new Error(`Empresa with ID ${empresaId} not found`)
+            throw new Error(`Empresa não encontrada`)
         }
 
         const empresa = rows[0]
@@ -92,14 +92,13 @@ export class EmpresaRepository {
     async updateEmpresa(empresaParams) {
         const query = `
             UPDATE empresa
-            SET razao_social = $1, nome_fantasia = $2, cnpj = $3
-            WHERE id = $4
+            SET razao_social = $1, nome_fantasia = $2
+            WHERE id = $3
             RETURNING *;
         `
         const values = [
             empresaParams.RazaoSocial,
             empresaParams.NomeFantasia,
-            empresaParams.Cnpj,
             empresaParams.Id,
         ]
 

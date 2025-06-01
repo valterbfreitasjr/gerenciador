@@ -33,7 +33,6 @@ export class EmpresaRequest {
     }
 
     isValidCNPJ(cnpj) {
-        // Remove caracteres não numéricos
         cnpj = cnpj.replace(/[^\d]+/g, '')
 
         if (cnpj.length !== 14) return false

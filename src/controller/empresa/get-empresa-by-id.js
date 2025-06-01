@@ -1,3 +1,5 @@
+import { notFound, serverError } from '../helpers/http.js'
+
 export class GetEmpresaByIdController {
     constructor(getEmpresaByIdUseCase) {
         this.getEmpresaByIdUseCase = getEmpresaByIdUseCase
@@ -12,16 +14,13 @@ export class GetEmpresaByIdController {
             )
 
             if (!empresa) {
-                return {
-                    statusCode: 404,
-                    body: { message: 'Empresa não encontrada' },
-                }
+                return notFound({ message: 'Empresa não encontrada' })
             }
 
             return { statusCode: 200, body: empresa }
         } catch (error) {
             console.error(error)
-            return { status: 500, body: { message: 'Erro ao obter empresa' } }
+            return serverError({ message: 'Erro ao obter empresa' })
         }
     }
 }

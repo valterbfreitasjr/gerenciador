@@ -1,4 +1,4 @@
-import { ok, serverError } from '../helpers/http.js'
+import { notFound, ok, serverError } from '../helpers/http.js'
 
 export class UpdateSetorController {
     constructor(updateSetorUseCase) {
@@ -12,10 +12,7 @@ export class UpdateSetorController {
             const updatedSetor = await this.updateSetorUseCase.execute(params)
 
             if (!updatedSetor) {
-                return {
-                    statusCode: 404,
-                    body: { message: 'Setor não encontrado' },
-                }
+                return notFound({ message: 'Setor não encontrado' })
             }
 
             return ok(updatedSetor)

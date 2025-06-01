@@ -1,3 +1,5 @@
+import { notFound, ok } from '../helpers/http.js'
+
 export class DeleteSetorController {
     constructor(deleteSetorUseCase) {
         this.deleteSetorUseCase = deleteSetorUseCase
@@ -10,18 +12,10 @@ export class DeleteSetorController {
             const deletedSetor = await this.deleteSetorUseCase.execute(setorId)
 
             if (!deletedSetor) {
-                return {
-                    statusCode: 404,
-                    body: { message: 'Setor não encontrado' },
-                }
+                return notFound({ message: 'Setor não encontrado' })
             }
 
-            return {
-                statusCode: 200,
-                body: {
-                    message: 'Setor deletado com sucesso',
-                },
-            }
+            return ok({ message: 'Setor deletado com sucesso' })
         } catch (error) {
             console.error(error)
             throw new Error('Erro ao deletar setor')
